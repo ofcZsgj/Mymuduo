@@ -1,8 +1,8 @@
 #pragma once
 
-#include "noncopyable.h"
-
 #include <string>
+
+#include "noncopyable.h"
 
 // LOG_INFO("%d %s, arg1, arg2...")
 #define LOG_INFO(logmsgFormat, ...)                       \
@@ -52,10 +52,10 @@
 // 定义日志级别
 enum LogLevel
 {
-    INFO,  // 普通信息
-    ERROR, // 错误信息
-    FATAL, //core信息
-    DEBUG, //调试信息
+    INFO,   // 普通信息
+    ERROR,  // 错误信息
+    FATAL,  //core信息
+    DEBUG,  //调试信息
 };
 
 // 输出一个日志类
