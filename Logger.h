@@ -20,7 +20,7 @@
     {                                                     \
         Logger &logger = Logger::instance();              \
         logger.setLogLevel(ERROR);                        \
-        chat buf[1024] = {0};                             \
+        char buf[1024] = {0};                             \
         snprintf(buf, 1024, logmsgFormat, ##__VA_ARGS__); \
         logger.log(buf);                                  \
     } while (0)
@@ -30,9 +30,10 @@
     {                                                     \
         Logger &logger = Logger::instance();              \
         logger.setLogLevel(FATAL);                        \
-        chat buf[1024] = {0};                             \
+        char buf[1024] = {0};                             \
         snprintf(buf, 1024, logmsgFormat, ##__VA_ARGS__); \
         logger.log(buf);                                  \
+        exit(-1);                                         \
     } while (0)
 
 #ifdef MUDEBUG
@@ -41,7 +42,7 @@
     {                                                     \
         Logger &logger = Logger::instance();              \
         logger.setLogLevel(DEBUG);                        \
-        chat buf[1024] = {0};                             \
+        char buf[1024] = {0};                             \
         snprintf(buf, 1024, logmsgFormat, ##__VA_ARGS__); \
         logger.log(buf);                                  \
     } while (0)
