@@ -12,7 +12,7 @@ class EventLoop;
  * Channel 理解为通道，封装了sockfd和其他感兴趣的event，如EPOLLIN，EPOLLOUT事件
  * 还绑定了poller返回的具体事件  
  */
-class Channel
+class Channel : noncopyable
 {
 public:
     using EventCallback = std::function<void()>;
@@ -89,7 +89,7 @@ private:
     const int fd_;     // fd，Poller所监听的对象
     int events_;       // 注册 fd 感兴趣的事件
     int revents_;      // Poller返回的具体发生的事件
-    int index_;        // used by Poller
+    int index_;        // 该channel在poller的状态(未添加/已添加/已删除)
 
     std::weak_ptr<void> tie_;  // 跨线程的对象生存状态的监听
     bool tied_;
