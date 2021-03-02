@@ -12,13 +12,13 @@
 #include "Logger.h"
 #include "Poller.h"
 
-// 防止一个进程创建多个EventLoop
+// 防止一个线程创建多个EventLoop
 __thread EventLoop *t_loopInThisThread = nullptr;
 
 // 定义默认的Poller I/O复用接口的超时时间
 const int kPollTimeMs = 10000;
 
-// muduo不适用一个线程安全队列，mainreactor生成channel到队列，subreactor从队列取channel消费
+// muduo不是用一个线程安全队列，mainreactor生成channel到队列，subreactor从队列取channel消费
 // 而是每个loop通过创建wakeupfd，用来notify唤醒subreactor处理新的channel
 int createEventFd()
 {
@@ -97,7 +97,7 @@ void EventLoop::quit()
 {
     quit_ = true;
 
-    // 如果是在其它线程中调用的quit(), 如在一个subloop调用了mainloo线程的quit, 因为已经将quit_置为true
+    // 如果是在其它线程中调用的quit(), 如在一个subloop调用了mainloop线程的quit, 因为已经将quit_置为true
     // 那么mainloop会被唤醒(让epoll_wait返回)后的下次while循环会退出从而退出事件循环
     if (!isInLoopThread())
     {

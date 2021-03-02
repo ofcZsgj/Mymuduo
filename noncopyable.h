@@ -10,6 +10,6 @@ public:
     noncopyable &operator=(const noncopyable &) = delete;
 
 protected:
-    noncopyable();
-    ~noncopyable();
+    noncopyable() = default;
+    ~noncopyable() = default;
 };
